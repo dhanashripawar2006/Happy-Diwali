@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Diwali ✨ - Dhanashri Pawar</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#150800;color:#fff;text-align:center;min-height:100vh}
+.container{padding:25px 15px 50px;max-width:500px;margin:auto}
+h1{font-size:46px;color:#FFD700;text-shadow:0 0 25px #ff9900}
+h2{font-size:22px;color:#ffccff;margin:8px 0}
+.diya{font-size:90px;animation:flicker 1s infinite}
+@keyframes flicker{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.card{background:rgba(255,255,255,0.13);border:2px solid #FFD700;border-radius:22px;padding:22px;margin:20px 0}
+.card p{font-size:17px;line-height:1.65}
+.name{font-size:29px;color:#FFD700;font-weight:800;margin-top:14px}
+.btn{background:#FFD700;color:#000;border:none;padding:14px 25px;border-radius:30px;font-size:17px;font-weight:700;margin:8px;cursor:pointer}
+.playbtn{background:#ff3399;color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:18px;font-weight:700;margin:12px;cursor:pointer;box-shadow:0 0 20px #ff3399}
+input{padding:12px;width:85%;border-radius:20px;border:none;outline:none;text-align:center;font-size:16px;margin:10px 0}
+</style>
+</head>
+<body>
+<div class="container">
+<div style="font-size:38px">🎆 🎇 🪔 🎆 🎇</div>
+<div class="diya">🪔</div>
+<h1>Happy Diwali</h1>
+<h2>Wishing You Joy & Light ✨</h2>
+
+<audio id="song" loop preload="auto">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+</audio>
+
+<button id="playBtn" class="playbtn" onclick="playSong()">▶️ Tap To Play Diwali Song 🎶</button>
+<p id="status" style="font-size:13px;color:#FFD700">Tap the button for song</p>
+
+<div class="card">
+<p>May this Diwali fill your home with happiness, love and prosperity.<br>May every diya light up your life,<br>And may every smile stay on your face forever! 🪔💛</p>
+<p style="margin-top:12px">Wishing you and your family good health, success and endless happiness.</p>
+<div class="name">- Dhanashri Pawar -</div>
+<p style="font-size:14px;margin-top:8px">❤️ With Love & Blessings ❤️</p>
+</div>
+
+<p style="font-size:18px">Write your name and make your own link 👇</p>
+<input id="myname" placeholder="Write your name..." />
+<br>
+<button class="btn" onclick="makeLink()">✨ Make My Link ✨</button>
+<button class="btn" onclick="share()" style="background:#25D366;color:#fff">📲 Share On WhatsApp</button>
+<p id="linkbox" style="margin-top:15px;word-break:break-all;color:#FFD700"></p>
+</div>
+
+<script>
+let song = document.getElementById('song');
+let played = false;
+function playSong(){
+  song.play().then(()=>{
+    played = true;
+    document.getElementById('status').innerText = '🎶 Song is Playing... Happy Diwali! 🎶';
+    document.getElementById('playBtn').innerText = '⏸️ Pause Song';
+  }).catch(()=>{ alert('Please tap again, and check volume / silent mode'); });
+  if(played){ song.pause(); played=false; document.getElementById('playBtn').innerText='▶️ Tap To Play Diwali Song 🎶'; }
+}
+document.addEventListener('click', ()=>{ if(!played) song.play().catch(()=>{}); });
+function makeLink(){
+  let n=document.getElementById('myname').value.trim();
+  if(!n){alert('Please write your name first!');return}
+  let link = location.origin + location.pathname + '?from=' + encodeURIComponent(n);
+  document.getElementById('linkbox').innerHTML = 'Your Link: <br>'+link;
+}
+function share(){
+  let text = "🪔 *Happy Diwali* 🪔%0A%0A Wishing you a very Happy Diwali from Dhanashri Pawar! ✨%0A%0A" + encodeURIComponent(location.href);
+  window.open("https://wa.me/?text="+text);
+}
+let p = new URLSearchParams(location.search).get('from');
+if(p){ document.querySelector('.name').innerText = '- ' + p + ' -'; }
+</script>
+</body>
+</html>
